@@ -2,8 +2,7 @@ const XLSX = require('xlsx');
 const fs = require("fs");
 const readline = require("readline");
 
-async function readFileLineByLine(filePath, a) {
-  const wb = XLSX.utils.book_new();
+async function readFileLineByLine(filePath, a, wb, sheetName) {
   const ws = {};
 
   let startRow = 2;  // Starting at row 2 (0-based index)
@@ -86,11 +85,28 @@ async function readFileLineByLine(filePath, a) {
     }
   });
 
-  // Append sheet and write file
-  XLSX.utils.book_append_sheet(wb, ws, "avgLowestFitnessValue");
-  XLSX.writeFile(wb, "tg.xlsx");
-  console.log(`Processed ${recordCount} records`);
+  // Append sheet to workbook
+  XLSX.utils.book_append_sheet(wb, ws, sheetName);
+  console.log(`Processed ${recordCount} records for sheet: ${sheetName}`);
+}
+async function processAllFiles() {
+  const sheets = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"];
+  // const fileNames = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"].map(fileName => fileName + "_best.txt");
+  const fileNames = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"].map(fileName => fileName + ".txt");
+  const fileNamesAvg = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"].map(fileName => fileName + "Avg.txt");
+  
+  // Create one workbook for all sheets
+  const wb = XLSX.utils.book_new();
+  
+  // Process each file and create a sheet
+  for(let i = 0; i < fileNames.length; i++) {
+    await readFileLineByLine(fileNames[i], fileNamesAvg[i], wb, sheets[i]);
+  }
+  excelName = "set1FV.xlsx";
+  // Write the single Excel file with all sheets
+  XLSX.writeFile(wb, excelName);
+  console.log(`All sheets created in ${excelName}`);
 }
 
-// readFileLineByLine("binomial.txt", "binomialAverage.txt");
-readFileLineByLine("tg.txt", "tgAvg.txt");
+// Run the main function
+processAllFiles().catch(console.error);

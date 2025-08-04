@@ -4,7 +4,7 @@ const readline = require("readline");
 
 async function createAllAverageExcel() {
   const names = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"];
-  const fileNames = names.map(name => name + "Avg.txt");
+  const fileNames = names.map(name => name + "_avg.txt");
   
   // Read all files
   const allFileData = {};
@@ -72,11 +72,10 @@ async function createAllAverageExcel() {
   }
   
   // Save the workbook
-  await workbook.xlsx.writeFile('allAvg.xlsx');
+  await workbook.xlsx.writeFile('set3.xlsx');
   
-  console.log(`Successfully created Excel file with ${currentRow - 1} rows and 10 columns`);
-  console.log("Output file: allAvg.xlsx");
-  console.log("Minimum values are highlighted in light blue");
+  console.log("Output file: set3.xlsx");
+  console.log("min values highlighted");
 }
 
 createAllAverageExcel().catch(console.error);
