@@ -87,11 +87,10 @@ async function readFileLineByLine(filePath, a) {
   });
 
   // Append sheet and write file
-  XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-  XLSX.writeFile(wb, "Exponential3.xlsx");
-
+  XLSX.utils.book_append_sheet(wb, ws, "avgLowestFitnessValue");
+  XLSX.writeFile(wb, "tg.xlsx");
   console.log(`Processed ${recordCount} records`);
 }
 
-// readFileLineByLine("allBinomial.txt", "allBinAvg.txt");
-readFileLineByLine("allEx.txt", "allExAvg.txt");
+// readFileLineByLine("binomial.txt", "binomialAverage.txt");
+readFileLineByLine("tg.txt", "tgAvg.txt");
