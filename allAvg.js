@@ -1,7 +1,9 @@
 const ExcelJS = require('exceljs');
 const fs = require("fs");
 const readline = require("readline");
-
+/*
+1. Takes averaged 80 models into one single sheet 
+ */
 async function createAllAverageExcel() {
   const names = ["bg", "eg", "og", "tg", "bs", "es", "os", "ts"];
   const fileNames = names.map(name => name + "_avg.txt");

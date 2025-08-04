@@ -1,3 +1,7 @@
+/*
+This only shows average fitness value of 10 models(same cross, same selection) in each sheet
+2. Need to input average model name, one txt file = 10 models average fv result
+*/
 const XLSX = require('xlsx');
 const fs = require("fs");
 const readline = require("readline");

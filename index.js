@@ -1,6 +1,9 @@
 const XLSX = require('xlsx');
 const fs = require("fs");
 const readline = require("readline");
+/*
+1. Takes all 80 models best in each iteration with average into 8 different sheets, one sheet = 10 models 
+*/ 
 
 async function readFileLineByLine(filePath, a, wb, sheetName) {
   const ws = {};
